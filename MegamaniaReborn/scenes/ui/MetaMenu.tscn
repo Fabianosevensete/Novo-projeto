@@ -1,0 +1,122 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/MetaMenu.gd" id="1_0"]
+
+[node name="MetaMenu" type="Control"]
+anchors_preset = 0
+size = Vector2(1280, 720)
+script = ExtResource("1_0")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.1, 0.95)
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 1
+anchor_top = 0.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 30.0
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 70.0
+text = "MegaMania Garage"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 36)
+add_theme_color_override("font_color", Color(0, 1, 1))
+
+[node name="CreditsLabel" type="Label" parent="."]
+anchors_preset = 6
+anchor_top = 0.0
+anchor_bottom = 0.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 75.0
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 100.0
+text = "MegaCredits: 0"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 18)
+add_theme_color_override("font_color", Color(1, 0.8, 0.2))
+
+[node name="ShipInfoLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_top = 0.0
+anchor_bottom = 0.0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_top = 100.0
+offset_left = 20.0
+offset_bottom = 125.0
+offset_right = 400.0
+text = "Selected: Interceptor"
+add_theme_font_size_override("font_size", 14)
+
+[node name="Tabs" type="HBoxContainer" parent="."]
+anchors_preset = 4
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 125.0
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 155.0
+alignment = 1
+
+[node name="ShipTab" type="Button" parent="Tabs"]
+custom_minimum_size = Vector2(200, 30)
+text = "SHIPS"
+add_theme_color_override("font_color", Color(0, 1, 1))
+
+[node name="UpgradeTab" type="Button" parent="Tabs"]
+custom_minimum_size = Vector2(200, 30)
+text = "UPGRADES"
+
+[node name="ShipScroll" type="ScrollContainer" parent="."]
+anchors_preset = 4
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 155.0
+offset_left = -500.0
+offset_right = 500.0
+offset_bottom = 620.0
+
+[node name="ShipContainer" type="VBoxContainer" parent="ShipScroll"]
+size_flags_horizontal = 8
+size_flags_vertical = 4
+alignment = 1
+
+[node name="UpgradeScroll" type="ScrollContainer" parent="."]
+anchors_preset = 4
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 155.0
+offset_left = -500.0
+offset_right = 500.0
+offset_bottom = 620.0
+visible = false
+
+[node name="UpgradeContainer" type="VBoxContainer" parent="UpgradeScroll"]
+size_flags_horizontal = 8
+size_flags_vertical = 4
+alignment = 1
+
+[node name="BottomBar" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_bottom = -10.0
+offset_left = 20.0
+offset_right = -20.0
+
+[node name="BackButton" type="Button" parent="BottomBar"]
+custom_minimum_size = Vector2(120, 35)
+text = "BACK"
+
+[node name="ResetButton" type="Button" parent="BottomBar"]
+custom_minimum_size = Vector2(120, 35)
+text = "RESET DATA"
+add_theme_color_override("font_color", Color(1, 0.3, 0.3))

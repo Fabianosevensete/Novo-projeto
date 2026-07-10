@@ -1,0 +1,119 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/CreditsScreen.gd" id="1_0"]
+
+[node name="CreditsScreen" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_0")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.06, 0.95)
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.15
+anchor_right = 0.5
+offset_left = -300
+offset_top = -25
+offset_right = 300
+offset_bottom = 25
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+horizontal_alignment = 1
+text = "CREDITS"
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+offset_left = -300
+offset_right = 300
+offset_top = 0
+offset_bottom = 400
+theme_override_constants/separation = 12
+
+[node name="GameLabel" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 30)
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+horizontal_alignment = 1
+text = "MegaMania Reborn"
+
+[node name="VersionLabel" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 25)
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+horizontal_alignment = 1
+text = "v0.8.0 Menus"
+
+[node name="Spacer1" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 20)
+text = ""
+
+[node name="DevLabel" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 25)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0, 1, 0.8)
+horizontal_alignment = 1
+text = "Development"
+
+[node name="DevName" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 25)
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+horizontal_alignment = 1
+text = "Fabiano & OpenCode AI"
+
+[node name="Spacer2" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 20)
+text = ""
+
+[node name="TechLabel" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 25)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0, 1, 0.8)
+horizontal_alignment = 1
+text = "Powered by"
+
+[node name="TechName" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 25)
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+horizontal_alignment = 1
+text = "Godot Engine 4 / GDScript"
+
+[node name="Spacer3" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 20)
+text = ""
+
+[node name="InspLabel" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 25)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0, 1, 0.8)
+horizontal_alignment = 1
+text = "Inspired by"
+
+[node name="InspName" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(600, 25)
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+horizontal_alignment = 1
+text = "MegaMania (1982) - Activision"
+
+[node name="BackBtn" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.85
+anchor_right = 0.5
+offset_left = -100
+offset_top = -20
+offset_right = 100
+offset_bottom = 20
+theme_override_font_sizes/font_size = 20
+text = "BACK"

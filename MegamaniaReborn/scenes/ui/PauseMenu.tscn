@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/PauseMenu.gd" id="1_0"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_0")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+offset_left = -200
+offset_top = -30
+offset_right = 200
+offset_bottom = 30
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+horizontal_alignment = 1
+text = "PAUSED"
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+offset_left = -120
+offset_right = 120
+offset_top = 0
+offset_bottom = 250
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="ResumeBtn" type="Button" parent="VBox"]
+custom_minimum_size = Vector2(240, 45)
+theme_override_font_sizes/font_size = 22
+text = "RESUME"
+
+[node name="SettingsBtn" type="Button" parent="VBox"]
+custom_minimum_size = Vector2(240, 45)
+theme_override_font_sizes/font_size = 22
+text = "SETTINGS"
+
+[node name="ControlsBtn" type="Button" parent="VBox"]
+custom_minimum_size = Vector2(240, 45)
+theme_override_font_sizes/font_size = 22
+text = "CONTROLS"
+
+[node name="QuitBtn" type="Button" parent="VBox"]
+custom_minimum_size = Vector2(240, 45)
+theme_override_font_sizes/font_size = 22
+text = "QUIT TO MENU"
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)

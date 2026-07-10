@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/main/Main.gd" id="1_0h1k2"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="2_1i2j3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3_2k3l4"]
+[ext_resource type="PackedScene" path="res://scenes/effects/ParallaxStarfield.tscn" id="4_3l4m5"]
+[ext_resource type="PackedScene" path="res://scenes/ui/MainMenu.tscn" id="5_4m5n6"]
+[ext_resource type="Script" path="res://scripts/effects/ScreenShake.gd" id="6_5n6o8"]
+[ext_resource type="PackedScene" path="res://scenes/ui/MetaMenu.tscn" id="7_6o7p9"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PauseMenu.tscn" id="8_0p1q2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/SettingsMenu.tscn" id="9_1q2r3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/ControlsScreen.tscn" id="10_2r3s4"]
+[ext_resource type="PackedScene" path="res://scenes/ui/CreditsScreen.tscn" id="11_3s4t5"]
+[ext_resource type="Script" path="res://scripts/effects/ScreenTransition.gd" id="12_0t1u2"]
+
+[sub_resource type="Environment" id="1_5n6o7"]
+background_mode = 0
+background_color = Color(0.02, 0.02, 0.06, 1)
+glow_enabled = true
+glow_bloom = 0.3
+glow_intensity = 0.5
+glow_strength = 1.2
+
+[sub_resource type="RectangleShape2D" id="2_6o7p8"]
+size = Vector2(1280, 720)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_0h1k2")
+
+[node name="GameWorld" type="Node2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="GameWorld"]
+current = true
+position = Vector2(640, 360)
+limit_left = -100
+limit_top = -100
+limit_right = 1380
+limit_bottom = 820
+script = ExtResource("6_5n6o8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameWorld"]
+environment = SubResource("1_5n6o7")
+
+[node name="Player" parent="GameWorld" instance=ExtResource("2_1i2j3")]
+position = Vector2(640, 600)
+
+[node name="CollisionBoundary" type="StaticBody2D" parent="GameWorld"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="GameWorld/CollisionBoundary"]
+position = Vector2(640, -50)
+shape = SubResource("2_6o7p8")
+
+[node name="Bottom" type="CollisionShape2D" parent="GameWorld/CollisionBoundary"]
+position = Vector2(640, 770)
+shape = SubResource("2_6o7p8")
+
+[node name="Left" type="CollisionShape2D" parent="GameWorld/CollisionBoundary"]
+position = Vector2(-50, 360)
+rotation = 1.5708
+shape = SubResource("2_6o7p8")
+
+[node name="Right" type="CollisionShape2D" parent="GameWorld/CollisionBoundary"]
+position = Vector2(1330, 360)
+rotation = 1.5708
+shape = SubResource("2_6o7p8")
+
+[node name="HUD" parent="." instance=ExtResource("3_2k3l4")]
+
+[node name="ParallaxStarfield" parent="." instance=ExtResource("4_3l4m5")]
+
+[node name="MainMenu" parent="." instance=ExtResource("5_4m5n6")]
+
+[node name="MetaMenu" parent="." instance=ExtResource("7_6o7p9")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("8_0p1q2")]
+
+[node name="SettingsMenu" parent="." instance=ExtResource("9_1q2r3")]
+
+[node name="ControlsScreen" parent="." instance=ExtResource("10_2r3s4")]
+
+[node name="CreditsScreen" parent="." instance=ExtResource("11_3s4t5")]
+
+[node name="ScreenTransition" type="CanvasLayer" parent="."]
+script = ExtResource("12_0t1u2")
+

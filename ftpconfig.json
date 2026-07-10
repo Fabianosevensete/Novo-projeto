@@ -1,0 +1,7 @@
+{
+  "host": "ftp.hostinger.com",
+  "username": "SEU_USUARIO",
+  "password": "SUA_SENHA",
+  "remotePath": "/public_html",
+  "localPath": "C:\\Users\\fabiano\\.antigravity-ide\\Projetos\\Novo projeto\\dist"
+}

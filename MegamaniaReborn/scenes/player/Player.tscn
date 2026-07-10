@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_89l6h"]
+
+[sub_resource type="RectangleShape2D" id="1_3k4m2"]
+size = Vector2(32, 32)
+
+[node name="Player" type="Area2D"]
+collision_layer = 1
+collision_mask = 28
+script = ExtResource("1_89l6h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+centered = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_3k4m2")
+
+[node name="ShootPoint" type="Node2D" parent="."]
+position = Vector2(0, -28)
+
+[node name="Trail" type="GPUParticles2D" parent="."]
+position = Vector2(0, 20)
+emitting = false
+amount = 8
+lifetime = 0.3
+explosiveness = 0.5
+local_coords = true
+
+[node name="DashCooldown" type="TextureProgressBar" parent="."]
+visible = false
+
+[node name="Flash" type="ColorRect" parent="."]
+visible = false

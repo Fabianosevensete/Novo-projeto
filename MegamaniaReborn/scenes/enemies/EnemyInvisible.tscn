@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/EnemyInvisible.gd" id="1_6g8i3"]
+
+[sub_resource type="RectangleShape2D" id="1_0j2k5"]
+size = Vector2(20, 20)
+
+[node name="EnemyInvisible" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_6g8i3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_0j2k5")

@@ -1,0 +1,213 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/HUD.gd" id="1_8h9k1"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_8h9k1")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 16
+offset_top = 16
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "SCORE: 0000000"
+
+[node name="WaveLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150
+offset_top = 80
+offset_right = 150
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0, 1, 1, 0.8)
+horizontal_alignment = 1
+text = "WAVE 1"
+
+[node name="LivesContainer" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_right = 0.2
+anchor_bottom = 1.0
+offset_left = 16
+offset_bottom = -16
+size = Vector2(256, 0)
+
+[node name="Heart1" type="ColorRect" parent="LivesContainer"]
+size = Vector2(20, 20)
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Heart2" type="ColorRect" parent="LivesContainer"]
+size = Vector2(20, 20)
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Heart3" type="ColorRect" parent="LivesContainer"]
+size = Vector2(20, 20)
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Heart4" type="ColorRect" parent="LivesContainer"]
+size = Vector2(20, 20)
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Heart5" type="ColorRect" parent="LivesContainer"]
+size = Vector2(20, 20)
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="ComboLabel" type="Label" parent="."]
+anchors_preset = 2
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 0
+offset_bottom = -80
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+horizontal_alignment = 1
+text = "COMBO"
+
+[node name="BossHPBar" type="TextureProgressBar" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250
+offset_top = 130
+offset_right = 250
+offset_bottom = 150
+fill_mode = 0
+value = 100
+min_value = 0
+max_value = 100
+modulate = Color(0.2, 1, 0.2, 1)
+theme_override_styles/background = null
+theme_override_styles/fill = null
+
+[node name="BossHPLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100
+offset_top = 108
+offset_right = 100
+offset_bottom = 130
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+horizontal_alignment = 1
+text = "??? BOSS ???"
+
+[node name="PowerUpContainer" type="VBoxContainer" parent="."]
+anchors_preset = 2
+anchor_right = 0.3
+anchor_bottom = 0.6
+offset_left = 16
+offset_top = 60
+size = Vector2(384, 0)
+theme_override_constants/separation = 2
+
+[node name="WeaponLabel" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -16
+offset_bottom = -48
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+horizontal_alignment = 2
+text = "[1] BASIC"
+
+[node name="DamageFlash" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0)
+mouse_filter = 2
+
+[node name="GameOverScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BG" type="ColorRect" parent="GameOverScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.8)
+mouse_filter = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.3
+offset_left = -200
+offset_top = -40
+offset_right = 200
+offset_bottom = 40
+theme_override_font_sizes/font_size = 52
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "GAME OVER"
+
+[node name="FinalScore" type="Label" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.45
+anchor_right = 0.5
+anchor_bottom = 0.45
+offset_left = -200
+offset_top = -20
+offset_right = 200
+offset_bottom = 20
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "SCORE: 0000000"
+
+[node name="HighScore" type="Label" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 0.5
+anchor_bottom = 0.55
+offset_left = -200
+offset_top = -20
+offset_right = 200
+offset_bottom = 20
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 1, 1, 0.7)
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "HIGH SCORE: 0000000"
+
+[node name="CreditsEarned" type="Label" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.63
+anchor_right = 0.5
+offset_left = -200
+offset_top = -15
+offset_right = 200
+offset_bottom = 15
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(1, 0.8, 0.2, 1)
+horizontal_alignment = 1
+text = "MegaCredits earned: 0"
+
+[node name="RestartPrompt" type="Label" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 0.7
+offset_left = -200
+offset_top = -20
+offset_right = 200
+offset_bottom = 20
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(1, 1, 1, 0.5)
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Press ENTER to restart"

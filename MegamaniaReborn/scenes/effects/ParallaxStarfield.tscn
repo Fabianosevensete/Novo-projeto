@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/effects/ParallaxBackground.gd" id="1_7h8k9"]
+
+[node name="ParallaxStarfield" type="ParallaxBackground"]
+scroll_offset = Vector2(0, 0)
+script = ExtResource("1_7h8k9")
+
+[node name="Layer1" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Stars1" type="TextureRect" parent="Layer1"]
+size = Vector2(1024, 1024)
+
+[node name="Layer2" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Stars2" type="TextureRect" parent="Layer2"]
+size = Vector2(1024, 1024)
+
+[node name="Layer3" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Stars3" type="TextureRect" parent="Layer3"]
+size = Vector2(1024, 1024)
+
+[node name="Layer4" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(1024, 1024)
+
+[node name="Stars4" type="TextureRect" parent="Layer4"]
+size = Vector2(1024, 1024)

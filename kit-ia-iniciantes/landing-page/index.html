@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kit IA para Iniciantes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a2e; background: #f8f9fa; line-height: 1.6; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 100px 0 80px; text-align: center; }
+    .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+    .hero h1 span { color: #e94560; }
+    .hero p { font-size: 1.25rem; max-width: 650px; margin: 0 auto 30px; opacity: 0.9; }
+    .btn { display: inline-block; background: #e94560; color: white; padding: 16px 40px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: all 0.3s; border: none; cursor: pointer; }
+    .btn:hover { background: #d63850; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(233,69,96,0.3); }
+    .price { font-size: 1.3rem; margin-top: 15px; opacity: 0.8; }
+    .price strong { font-size: 2rem; color: #e94560; }
+    .section { padding: 80px 0; }
+    .section h2 { text-align: center; font-size: 2rem; margin-bottom: 50px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .card { background: white; border-radius: 12px; padding: 35px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s; }
+    .card:hover { transform: translateY(-5px); }
+    .card .icon { font-size: 2.5rem; margin-bottom: 15px; }
+    .card h3 { margin-bottom: 10px; }
+    .card p { color: #666; font-size: 0.95rem; }
+    .benefits { background: white; }
+    .benefits-list { max-width: 700px; margin: 0 auto; }
+    .benefits-list li { padding: 12px 0; border-bottom: 1px solid #eee; list-style: none; }
+    .benefits-list li::before { content: "✓ "; color: #e94560; font-weight: bold; }
+    .cta-section { background: linear-gradient(135deg, #0f3460, #1a1a2e); color: white; text-align: center; padding: 80px 0; }
+    .cta-section h2 { font-size: 2rem; margin-bottom: 20px; }
+    .cta-section p { margin-bottom: 30px; opacity: 0.9; }
+    footer { text-align: center; padding: 30px; color: #999; font-size: 0.9rem; }
+    @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .grid-3 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <h1>Kit <span>IA para Iniciantes</span></h1>
+    <p>Do zero ao primeiro resultado com inteligência artificial. Guia completo + templates prontos + cheatsheet.</p>
+    <a href="#comprar" class="btn">QUERO MEU KIT</a>
+    <p class="price">A partir de <strong>R$ 47</strong> ~acesso vitalício~</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>O que está incluído</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">📘</div>
+        <h3>E-book Completo</h3>
+        <p>7 capítulos cobrindo do básico ao avançado, com linguagem simples e exemplos práticos.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧩</div>
+        <h3>50+ Prompts Prontos</h3>
+        <p>Templates organizados por categoria: trabalho, estudo, criação de conteúdo e vida pessoal.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Cheatsheet</h3>
+        <p>Referência rápida de 1 página para consultar no dia a dia. Imprima e cole na parede.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits section">
+  <div class="container">
+    <h2>Para quem é este kit</h2>
+    <ul class="benefits-list">
+      <li>Profissionais que querem usar IA para ser mais produtivos</li>
+      <li>Empreendedores que buscam automatizar tarefas do negócio</li>
+      <li>Estudantes que querem aprender mais rápido com IA</li>
+      <li>Criadores de conteúdo que querem produzir mais em menos tempo</li>
+      <li>Qualquer pessoa que nunca usou IA e não sabe por onde começar</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>O que você vai aprender</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>O que é IA</h3>
+        <p>Entenda de forma simples como a IA funciona e o que ela pode fazer por você.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Criar Prompts</h3>
+        <p>Aprenda a estrutura do prompt perfeito para obter respostas incríveis.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📈</div>
+        <h3>Aplicar no Dia a Dia</h3>
+        <p>Casos práticos que você pode usar imediatamente no trabalho, estudos e vida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="comprar">
+  <div class="container">
+    <h2>Comece hoje, sem complicação</h2>
+    <p>Pagamento único, acesso vitalício, atualizações gratuitas.</p>
+    <a href="#" class="btn">COMPRAR KIT AGORA — R$ 47</a>
+  </div>
+</section>
+
+<footer>
+  <p>Kit IA para Iniciantes &mdash; 2026</p>
+</footer>
+
+</body>
+</html>

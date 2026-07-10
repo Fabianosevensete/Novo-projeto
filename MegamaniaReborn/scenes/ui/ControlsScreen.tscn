@@ -1,0 +1,156 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/ControlsScreen.gd" id="1_0"]
+
+[node name="ControlsScreen" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_0")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.06, 0.95)
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+offset_left = -300
+offset_top = -25
+offset_right = 300
+offset_bottom = 25
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+horizontal_alignment = 1
+text = "CONTROLS"
+
+[node name="Grid" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+offset_left = -250
+offset_right = 250
+offset_top = 0
+offset_bottom = 500
+theme_override_constants/separation = 8
+
+[node name="R1" type="HBoxContainer" parent="Grid"]
+custom_minimum_size = Vector2(500, 35)
+
+[node name="R1K" type="Label" parent="Grid/R1"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "Move"
+
+[node name="R1V" type="Label" parent="Grid/R1"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Arrow Keys / WASD"
+
+[node name="R2" type="HBoxContainer" parent="Grid"]
+custom_minimum_size = Vector2(500, 35)
+
+[node name="R2K" type="Label" parent="Grid/R2"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "Shoot"
+
+[node name="R2V" type="Label" parent="Grid/R2"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Space"
+
+[node name="R3" type="HBoxContainer" parent="Grid"]
+custom_minimum_size = Vector2(500, 35)
+
+[node name="R3K" type="Label" parent="Grid/R3"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "Dash"
+
+[node name="R3V" type="Label" parent="Grid/R3"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Shift"
+
+[node name="R4" type="HBoxContainer" parent="Grid"]
+custom_minimum_size = Vector2(500, 35)
+
+[node name="R4K" type="Label" parent="Grid/R4"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "Weapons 1-5"
+
+[node name="R4V" type="Label" parent="Grid/R4"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Number Keys 1-5"
+
+[node name="R5" type="HBoxContainer" parent="Grid"]
+custom_minimum_size = Vector2(500, 35)
+
+[node name="R5K" type="Label" parent="Grid/R5"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "Pause"
+
+[node name="R5V" type="Label" parent="Grid/R5"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "ESC"
+
+[node name="R6" type="HBoxContainer" parent="Grid"]
+custom_minimum_size = Vector2(500, 35)
+
+[node name="R6K" type="Label" parent="Grid/R6"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "Confirm"
+
+[node name="R6V" type="Label" parent="Grid/R6"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Enter"
+
+[node name="R7" type="HBoxContainer" parent="Grid"]
+custom_minimum_size = Vector2(500, 35)
+
+[node name="R7K" type="Label" parent="Grid/R7"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "Cancel / Back"
+
+[node name="R7V" type="Label" parent="Grid/R7"]
+custom_minimum_size = Vector2(250, 35)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "ESC"
+
+[node name="BackBtn" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.85
+anchor_right = 0.5
+offset_left = -100
+offset_top = -20
+offset_right = 100
+offset_bottom = 20
+theme_override_font_sizes/font_size = 20
+text = "BACK"

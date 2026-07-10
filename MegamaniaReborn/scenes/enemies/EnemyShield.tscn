@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/EnemyShield.gd" id="1_7j9k4"]
+
+[sub_resource type="RectangleShape2D" id="1_1k3m6"]
+size = Vector2(22, 22)
+
+[node name="EnemyShield" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_7j9k4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_1k3m6")

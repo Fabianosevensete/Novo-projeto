@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/EnemyInvoker.gd" id="1_8j0k5"]
+
+[sub_resource type="RectangleShape2D" id="1_2l4m7"]
+size = Vector2(28, 28)
+
+[node name="EnemyInvoker" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_8j0k5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+centered = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_2l4m7")

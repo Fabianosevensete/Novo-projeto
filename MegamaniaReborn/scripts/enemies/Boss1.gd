@@ -29,6 +29,7 @@ func take_damage(amount: int = 1):
 func _process(delta):
 	if not can_take_damage:
 		return
+	super._process(delta)
 	_move(delta)
 	_shoot_timer -= delta
 	if _shoot_timer <= 0:

@@ -1,6 +1,6 @@
 extends Node
 
-func _init():
+func before_all():
 	if not get_tree().root.has_node("EventBus"):
 		var eb = load("res://scripts/core/EventBus.gd").new()
 		get_tree().root.add_child(eb)

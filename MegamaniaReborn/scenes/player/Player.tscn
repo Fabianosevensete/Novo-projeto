@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_89l6h"]
 
 [sub_resource type="RectangleShape2D" id="1_3k4m2"]
-size = Vector2(32, 32)
+size = Vector2(40, 40)
 
 [node name="Player" type="Area2D"]
 collision_layer = 1

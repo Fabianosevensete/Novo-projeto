@@ -77,23 +77,114 @@ func _load_modifiers():
 
 
 func _generate_texture():
-	var image = Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	var img_size = 48
+	var image = Image.create(img_size, img_size, false, Image.FORMAT_RGBA8)
 	image.fill(Color(0, 0, 0, 0))
-	var cyan = Color(0, 0.8, 1, 1)
-	for x in range(32):
-		for y in range(32):
-			var dx = x - 16
-			var dy = y - 16
-			if abs(dx) <= 1 and dy <= 14 and dy >= -14:
-				image.set_pixel(x, y, cyan)
-			elif abs(dy) <= 1 and dx <= 8 and dx >= -8:
-				image.set_pixel(x, y, cyan)
-			elif dy <= -12 and abs(dx) <= 10 - (16 + dy) * 0.3:
-				image.set_pixel(x, y, cyan)
-	image.set_pixel(16, 0, Color(1, 1, 1, 1))
+	var cx = img_size / 2
+	for x in range(img_size):
+		for y in range(img_size):
+			var dx = x - cx
+			var dy = y - cx
+			var col = _ship_pixel(dx, dy)
+			if col.a > 0:
+				image.set_pixel(x, y, col)
 	var texture = ImageTexture.create_from_image(image)
 	sprite.texture = texture
 	_texture_generated = true
+
+
+func _body_hw(dy: int) -> int:
+	if dy < -22 or dy > 14:
+		return 0
+	if dy <= -12:
+		return maxi(0, roundi((-dy - 23.0) * 0.55))
+	if dy <= 6:
+		return 6
+	if dy <= 12:
+		return maxi(2, 7 - roundi((dy - 6) * 0.7))
+	return 2
+
+
+func _in_right_wing(dx: int, dy: int) -> bool:
+	if dy < -6 or dy > 8 or dx < 5:
+		return false
+	var outer := 0.0
+	var inner := 0.0
+	if dy <= 2:
+		outer = 7.0 + 1.375 * (dy + 6.0)
+		inner = 7.0 - 0.1 * (dy + 6.0)
+	elif dy <= 4:
+		outer = 18.0 - 0.5 * (dy - 2.0)
+		inner = 7.0 - 0.1 * (dy + 6.0)
+	else:
+		outer = 18.0 - 0.5 * (dy - 2.0)
+		inner = 6.0 + 2.25 * (dy - 4.0)
+	var bhw = _body_hw(dy)
+	return dx >= maxf(inner, bhw + 1.0) and dx <= outer
+
+
+func _ship_pixel(dx: int, dy: int) -> Color:
+	var abs_dx = abs(dx)
+	var bhw = _body_hw(dy)
+
+	# Engine glow
+	if bhw <= 0 and dy >= 10 and dy <= 20 and abs_dx <= 2:
+		var fade = 1.0 - (dy - 10.0) / 10.0
+		return Color(1.0, 0.5, 0.05, fade * 0.35)
+
+	# Engine ports
+	if dy >= 10 and dy <= 13 and abs_dx >= 1 and abs_dx <= 2:
+		var t = (dy - 10.0) / 3.0
+		return Color(1.0, 0.55 - t * 0.35, 0.1, 1.0)
+
+	# Body (fuselage)
+	if bhw > 0 and abs_dx <= bhw:
+		if dy >= -22 and dy <= -12:
+			var t = (dy + 22.0) / 10.0
+			return Color(0.08 + t * 0.12, 0.15 + t * 0.15, 0.32 + t * 0.15, 1.0)
+		if dy <= 6:
+			var highlight = 0.0
+			if abs_dx == bhw:
+				highlight = 0.15
+			elif abs_dx >= bhw - 1:
+				highlight = 0.08
+			if dy >= -8 and dy <= 0 and dx % 3 == 0 and dy % 4 == 0:
+				return Color(0.12, 0.22, 0.38, 1.0)
+			return Color(0.15 + highlight, 0.28 + highlight, 0.45 + highlight * 0.5, 1.0)
+		if dy <= 12:
+			var t = (dy - 6.0) / 6.0
+			return Color(0.15 - t * 0.05, 0.28 - t * 0.08, 0.45 - t * 0.12, 1.0)
+		if dy <= 14:
+			return Color(0.12, 0.18, 0.28, 1.0)
+
+	# Cockpit
+	if bhw > 0 and abs_dx <= 2 and dy >= -12 and dy <= -6:
+		if dy == -9 and dx == 0:
+			return Color(1.0, 1.0, 1.0, 1.0)
+		return Color(0.35, 0.75, 1.0, 1.0)
+
+	# Wings
+	if dx < 0:
+		if _in_right_wing(-dx, dy):
+			var adx = -dx
+			if adx >= 14:
+				return Color(0.55, 0.08, 0.08, 1.0)
+			if adx >= 12:
+				return Color(0.4, 0.12, 0.1, 1.0)
+			if adx >= bhw + 1 and adx <= bhw + 2:
+				return Color(0.22, 0.38, 0.55, 1.0)
+			return Color(0.14, 0.24, 0.38, 1.0)
+	elif dx > 0:
+		if _in_right_wing(dx, dy):
+			if dx >= 14:
+				return Color(0.55, 0.08, 0.08, 1.0)
+			if dx >= 12:
+				return Color(0.4, 0.12, 0.1, 1.0)
+			if dx >= bhw + 1 and dx <= bhw + 2:
+				return Color(0.22, 0.38, 0.55, 1.0)
+			return Color(0.14, 0.24, 0.38, 1.0)
+
+	return Color.TRANSPARENT
 
 
 func _create_shield_orb():
@@ -148,13 +239,12 @@ func _reset_state():
 	var score_manager = get_node("/root/ScoreManager")
 	if score_manager:
 		score_manager.score_multiplier = 1
-	if _start_weapon > 0:
-		event_bus.weapon_changed.emit(current_weapon, Constants.WEAPON_NAMES[current_weapon])
+	event_bus.weapon_changed.emit(current_weapon, Constants.WEAPON_NAMES[current_weapon])
 	position = screen_size * 0.5
 	visible = true
 	modulate = Color.WHITE
 	if collision_shape:
-		collision_shape.disabled = false
+		collision_shape.set_deferred("disabled", false)
 
 
 func _process(delta):
@@ -362,7 +452,7 @@ func collect_pickup(pickup_type: int):
 func _die():
 	visible = false
 	if collision_shape:
-		collision_shape.disabled = true
+		collision_shape.set_deferred("disabled", true)
 	if event_bus:
 		event_bus.player_died.emit(global_position)
 

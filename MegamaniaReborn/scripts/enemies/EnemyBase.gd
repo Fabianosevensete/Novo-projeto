@@ -9,6 +9,7 @@ var speed := 100.0
 var score_value := 100
 var enemy_type := "base"
 var damage_on_contact := 1
+var is_minion := false
 var _texture_generated := false
 
 @onready var sprite := $Sprite2D
@@ -27,7 +28,7 @@ func _ready():
 
 
 func _apply_wave_scaling():
-	var wm = get_node("/root/WaveManager")
+	var wm = get_node_or_null("/root/WaveManager") if is_inside_tree() else null
 	var wave = wm.current_wave if wm else 1
 	if wave <= 1:
 		return
@@ -114,21 +115,27 @@ func _flash_hit():
 		sprite.modulate = Color.RED
 		var tween = create_tween()
 		tween.tween_property(sprite, "modulate", Color.WHITE, 0.1)
-		event_bus.screen_shake.emit(Constants.SCREEN_SHAKE_INTENSITY * 0.5, 0.15)
+		if event_bus:
+			event_bus.screen_shake.emit(Constants.SCREEN_SHAKE_INTENSITY * 0.5, 0.15)
 
 
 func _die():
-	event_bus.enemy_killed.emit(enemy_type, global_position, score_value)
-	score_manager.add_score(score_value)
+	if not is_minion:
+		if event_bus:
+			event_bus.enemy_killed.emit(enemy_type, global_position, score_value)
+		if score_manager:
+			score_manager.add_score(score_value)
+		_try_drop_pickup()
+		_show_score_popup()
 	_spawn_explosion()
-	_try_drop_pickup()
-	_show_score_popup()
 	queue_free()
 
 
 func _show_score_popup():
+	if not is_inside_tree():
+		return
 	var scene = load("res://scripts/effects/FloatingText.gd")
-	if scene:
+	if scene and get_tree() and get_tree().current_scene:
 		var ft = scene.new()
 		ft.global_position = global_position
 		get_tree().current_scene.add_child(ft)
@@ -152,8 +159,10 @@ func _try_drop_pickup():
 		var pickup = scene.instantiate()
 		pickup.pickup_type = pickup_type
 		pickup.global_position = global_position
-		var parent_node = get_parent() if get_parent() else get_tree().current_scene
-		parent_node.add_child(pickup)
+		var parent_node = get_parent() if get_parent() else (_get_current_scene())
+		if parent_node:
+			parent_node.add_child(pickup)
+
 
 
 func _spawn_explosion():
@@ -161,17 +170,25 @@ func _spawn_explosion():
 	if scene:
 		var explosion = scene.instantiate()
 		explosion.global_position = global_position
-		var parent_node = get_parent() if get_parent() else get_tree().current_scene
-		parent_node.add_child(explosion)
+		var parent_node = get_parent() if get_parent() else (_get_current_scene())
+		if parent_node:
+			parent_node.add_child(explosion)
 
+
+func _get_current_scene():
+	if not is_inside_tree():
+		return null
+	return get_tree().current_scene
 
 func _check_out_of_bounds():
 	var viewport = get_viewport()
+	if not viewport:
+		return
 	var view_size = viewport.get_visible_rect().size
 	var margin = 200.0
 	if global_position.x < -margin or global_position.x > view_size.x + margin or \
 	   global_position.y < -margin or global_position.y > view_size.y + margin:
-		queue_free()
+		_die()
 
 
 func _on_area_entered(area: Area2D):

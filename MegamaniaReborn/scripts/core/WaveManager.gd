@@ -39,6 +39,9 @@ func _on_game_state_changed(new_state: int, _prev: int):
 
 func start_waves():
 	current_wave = 0
+	_world = get_tree().root.find_child("GameWorld", true, false)
+	if not _world:
+		_world = get_tree().root
 	_next_wave()
 
 
@@ -106,8 +109,6 @@ func _process(delta):
 		_process_boss_wave()
 	elif Constants.MODE_HAS_ENEMIES[_mode] and enemies_to_spawn.size() > 0:
 		_process_normal_wave(delta)
-	else:
-		_process_boss_wave()
 
 
 func _process_normal_wave(delta):

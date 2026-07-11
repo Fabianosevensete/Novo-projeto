@@ -71,7 +71,8 @@ func _process(delta):
 	_lifetime -= delta
 	position.y += Constants.PICKUP_FALL_SPEED * delta
 	var pulse = 1.0 + sin(_time * Constants.PICKUP_PULSE_SPEED) * 0.15
-	sprite.scale = Vector2(pulse, pulse)
+	if sprite:
+		sprite.scale = Vector2(pulse, pulse)
 	if _lifetime <= 0:
 		_despawn()
 	_check_out_of_bounds()
@@ -85,6 +86,8 @@ func _despawn():
 
 func _check_out_of_bounds():
 	var viewport = get_viewport()
+	if not viewport:
+		return
 	var view_size = viewport.get_visible_rect().size
 	if global_position.y > view_size.y + 100:
 		queue_free()
@@ -94,8 +97,9 @@ func _on_area_entered(area: Area2D):
 	if area.is_in_group(Constants.GROUPS.PLAYER):
 		if area.has_method("collect_pickup"):
 			area.collect_pickup(pickup_type)
-		var event_bus = get_node("/root/EventBus")
-		event_bus.pickup_collected.emit(pickup_type, global_position)
+		var event_bus = get_node_or_null("/root/EventBus")
+		if event_bus:
+			event_bus.pickup_collected.emit(pickup_type, global_position)
 		_collect_effect()
 
 
@@ -103,7 +107,7 @@ func _collect_effect():
 	var pickup_names = ["HP", "Shield", "WeaponUp", "x2 Score", "Speed"]
 	var name = pickup_names[pickup_type] if pickup_type >= 0 and pickup_type < pickup_names.size() else "Pickup"
 	var ft_script = load("res://scripts/effects/FloatingText.gd")
-	if ft_script:
+	if ft_script and get_tree() and get_tree().current_scene:
 		var ft = ft_script.new()
 		ft.global_position = global_position
 		get_tree().current_scene.add_child(ft)

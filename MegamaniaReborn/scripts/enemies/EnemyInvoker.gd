@@ -70,5 +70,6 @@ func _spawn_minion():
 	minion.global_position = global_position + Vector2(randf_range(-20, 20), 20)
 	minion.speed = Constants.ENEMY_KAMIKAZE_SPEED * 1.2
 	minion.score_value = 50
+	minion.is_minion = true
 	var parent_node = get_parent() if get_parent() else get_tree().current_scene
 	parent_node.add_child(minion)

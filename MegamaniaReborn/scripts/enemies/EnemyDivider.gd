@@ -62,6 +62,7 @@ func _spawn_children():
 		child.speed = Constants.ENEMY_KAMIKAZE_SPEED
 		child.score_value = Constants.ENEMY_DIVIDER_CHILD_SCORE
 		child.collision_shape.scale = Vector2(0.6, 0.6)
+		child.is_minion = true
 		var parent_node = get_parent() if get_parent() else get_tree().current_scene
 		parent_node.add_child(child)
 

@@ -28,12 +28,13 @@ func _ready():
 	_screen_size = get_viewport().get_visible_rect().size
 	add_to_group(Constants.GROUPS.ENEMY)
 	area_entered.connect(_on_area_entered)
-	var wave = get_node("/root/WaveManager")
+	var wave = get_node_or_null("/root/WaveManager") if is_inside_tree() else null
 	if wave:
 		var wave_num = wave.current_wave
 		max_health = base_health + (wave_num - 1) * Constants.BOSS_HEALTH_PER_WAVE
 		health = max_health
-		event_bus.boss_hp_changed.emit(health, max_health)
+		if event_bus:
+			event_bus.boss_hp_changed.emit(health, max_health)
 	_generate_texture()
 	_enter_scene()
 

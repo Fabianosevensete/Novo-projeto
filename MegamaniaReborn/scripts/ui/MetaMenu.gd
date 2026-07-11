@@ -2,44 +2,52 @@ extends Control
 
 const Constants = preload("res://scripts/utils/Constants.gd")
 
-@onready var save_manager: SaveManager
-@onready var credits_label: Label = $CreditsLabel
-@onready var ship_container: VBoxContainer = $ShipScroll/ShipContainer
-@onready var upgrade_container: VBoxContainer = $UpgradeScroll/UpgradeContainer
-@onready var back_button: Button = $BottomBar/BackButton
-@onready var ship_info_label: Label = $ShipInfoLabel
-@onready var reset_button: Button = $BottomBar/ResetButton
-@onready var ship_scroll: ScrollContainer = $ShipScroll
-@onready var upgrade_scroll: ScrollContainer = $UpgradeScroll
+var save_manager: SaveManager
+var credits_label: Label
+var ship_container: VBoxContainer
+var upgrade_container: VBoxContainer
+var back_button: Button
+var ship_info_label: Label
+var reset_button: Button
+var ship_scroll: ScrollContainer
+var upgrade_scroll: ScrollContainer
+var ship_tab: Button
+var upgrade_tab: Button
 
-var selected_tab := 0  # 0 = ships, 1 = upgrades
+var selected_tab := 0
 
 
 func _ready():
 	save_manager = get_node("/root/SaveManager")
-	back_button.pressed.connect(_on_back)
-	reset_button.pressed.connect(_on_reset)
-	var tab_ship = $Tabs/ShipTab
-	var tab_upgrade = $Tabs/UpgradeTab
-	if tab_ship:
-		tab_ship.pressed.connect(func(): show_ships())
-	if tab_upgrade:
-		tab_upgrade.pressed.connect(func(): show_upgrades())
+	credits_label = get_node_or_null("CreditsLabel") as Label
+	ship_container = get_node_or_null("ShipScroll/ShipContainer") as VBoxContainer
+	upgrade_container = get_node_or_null("UpgradeScroll/UpgradeContainer") as VBoxContainer
+	back_button = get_node_or_null("BottomBar/BackButton") as Button
+	ship_info_label = get_node_or_null("ShipInfoLabel") as Label
+	reset_button = get_node_or_null("BottomBar/ResetButton") as Button
+	ship_scroll = get_node_or_null("ShipScroll") as ScrollContainer
+	upgrade_scroll = get_node_or_null("UpgradeScroll") as ScrollContainer
+	ship_tab = get_node_or_null("Tabs/ShipTab") as Button
+	upgrade_tab = get_node_or_null("Tabs/UpgradeTab") as Button
+	if back_button: back_button.pressed.connect(_on_back)
+	if reset_button: reset_button.pressed.connect(_on_reset)
+	if ship_tab: ship_tab.pressed.connect(func(): show_ships())
+	if upgrade_tab: upgrade_tab.pressed.connect(func(): show_upgrades())
 	show_ships()
 	update_display()
 
 
 func update_display():
-	credits_label.text = "MegaCredits: " + str(save_manager.credits)
-	ship_info_label.text = "Selected: " + Constants.SHIP_NAMES[save_manager.selected_ship]
+	if credits_label: credits_label.text = "MegaCredits: " + str(save_manager.credits if save_manager else 0)
+	if ship_info_label: ship_info_label.text = "Selected: " + Constants.SHIP_NAMES[save_manager.selected_ship if save_manager else 0]
 
 
 func show_ships():
 	selected_tab = 0
 	ship_scroll.show()
 	upgrade_scroll.hide()
-	%ShipTab.add_theme_color_override("font_color", Color(0, 1, 1))
-	%UpgradeTab.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
+	if ship_tab: ship_tab.add_theme_color_override("font_color", Color(0, 1, 1))
+	if upgrade_tab: upgrade_tab.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
 	rebuild_ships()
 
 
@@ -47,8 +55,8 @@ func show_upgrades():
 	selected_tab = 1
 	ship_scroll.hide()
 	upgrade_scroll.show()
-	%ShipTab.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
-	%UpgradeTab.add_theme_color_override("font_color", Color(0, 1, 1))
+	if ship_tab: ship_tab.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
+	if upgrade_tab: upgrade_tab.add_theme_color_override("font_color", Color(0, 1, 1))
 	rebuild_upgrades()
 
 
@@ -162,11 +170,12 @@ func _buy_upgrade(up: int):
 
 func _on_back():
 	hide()
-	get_node("/root/GameManager").change_state(get_node("/root/GameManager").GameState.MENU)
+	var gm = get_node("/root/GameManager")
+	if gm: gm.change_state(gm.GameState.MENU)
 
 
 func _on_reset():
-	save_manager.reset_data()
+	if save_manager: save_manager.reset_data()
 	update_display()
 	rebuild_ships()
 	rebuild_upgrades()

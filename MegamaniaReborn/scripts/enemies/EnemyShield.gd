@@ -1,7 +1,5 @@
 extends EnemyBase
 
-const Constants = preload("res://scripts/utils/Constants.gd")
-
 var _target_velocity := Vector2.ZERO
 var _shield_hp := Constants.ENEMY_SHIELD_HP
 var _shield_broken := false

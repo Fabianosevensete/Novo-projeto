@@ -48,11 +48,11 @@ func _toggle_visibility():
 	if _is_visible_state:
 		_cycle_timer = Constants.ENEMY_INVISIBLE_VISIBLE_TIME
 		sprite.modulate = Color(1, 1, 1, 1)
-		collision_shape.disabled = false
+		collision_shape.set_deferred("disabled", false)
 	else:
 		_cycle_timer = Constants.ENEMY_INVISIBLE_CYCLE - Constants.ENEMY_INVISIBLE_VISIBLE_TIME
 		sprite.modulate = Color(1, 1, 1, 0.2)
-		collision_shape.disabled = true
+		collision_shape.set_deferred("disabled", true)
 
 
 func _move(delta):

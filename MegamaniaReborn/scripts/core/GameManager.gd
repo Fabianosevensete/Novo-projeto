@@ -45,9 +45,8 @@ func change_state(new_state: GameState):
 		return
 	previous_state = current_state
 	current_state = new_state
-	var tree := get_tree()
-	if tree and not OS.has_feature("headless"):
-		tree.paused = (current_state == GameState.PAUSED)
+	if is_inside_tree():
+		get_tree().paused = (current_state == GameState.PAUSED)
 	if event_bus:
 		event_bus.game_state_changed.emit(new_state, previous_state)
 

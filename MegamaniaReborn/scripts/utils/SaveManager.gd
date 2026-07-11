@@ -44,8 +44,11 @@ func save_data():
 	var cfg = ConfigFile.new()
 	cfg.set_value("meta", "credits", credits)
 	cfg.set_value("meta", "selected_ship", selected_ship)
-	var sm = get_node_or_null("/root/ScoreManager")
-	var current_score = sm.get_total_score() if sm else 0
+	var current_score = 0
+	if is_inside_tree():
+		var sm = get_node_or_null("/root/ScoreManager")
+		if sm:
+			current_score = sm.get_total_score()
 	cfg.set_value("meta", "high_score", max(high_score, current_score))
 	cfg.set_value("meta", "total_runs", total_runs)
 	cfg.set_value("meta", "total_kills", total_kills)
